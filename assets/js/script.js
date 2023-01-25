@@ -1,13 +1,19 @@
+
+
 // displays the current day following format: Monday, 1st January, 1999
 $('#currentDay').text(moment().format("dddd, Do MMMM, YYYY"));
 
 let rootEl = $('.container');
 let currentHour = moment().format("HH");
-const OfficeHoursStart = 9; 
-const OfficeHoursEnd = 17;
-const taskHour = localStorage.getItem('task');
 
-for (var hour = OfficeHoursStart; hour <= OfficeHoursEnd; hour++) {
+const hourlyTask = 'hourlyTask';
+const hourlyTaskString = localStorage.getItem(hourlyTask);
+const dailyPlan = JSON.parse(hourlyTaskString) ?? Array(24);
+
+
+
+
+for (var hour = 9; hour <= 17; hour++) {
 
   // Create a new `<div>` for each row
   let rowEl = $('<div>').addClass("row time-block");
@@ -45,14 +51,19 @@ for (var hour = OfficeHoursStart; hour <= OfficeHoursEnd; hour++) {
   //  Add new `<i>` to the `<button>` element.
   saveButtonEl.append(floppyDiskIcon);
 }
+var savedHour = $("i").attr("data-hour");
+console.log(savedHour);
 
   rootEl.on("click", ".fas", function () {
     var savedHour = $(this).attr("data-hour");
     console.log(savedHour);
-      localStorage.setItem('task', $("#" + savedHour).val());
-      console.log(taskHour);
+    dailyPlan[savedHour] = $("#" + savedHour).val();
+    console.log(dailyPlan[savedHour]);
+    localStorage.setItem(hourlyTask, JSON.stringify(dailyPlan) );   
 });
 
-  
-
-
+function loadDailyTask(){
+  for (savedHour=9; savedHour<=17; savedHour++){
+  $("#" + savedHour).text(dailyPlan[savedHour]);
+}};
+loadDailyTask();

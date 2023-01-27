@@ -1,18 +1,20 @@
-
-
 // displays the current day following format: Monday, 1st January, 1999
 $('#currentDay').text(moment().format("dddd, Do MMMM, YYYY"));
 
+// variables
+//main page container
 let rootEl = $('.container');
+// current hour following moment format
 let currentHour = moment().format("HH");
 
+
+// create an array for the tasks retreived from the localstorage
 const hourlyTask = 'hourlyTask';
 const hourlyTaskString = localStorage.getItem(hourlyTask);
 const dailyPlan = JSON.parse(hourlyTaskString) ?? Array(24);
 
 
-
-
+// create a loop to dynamically create the different page elements
 for (var hour = 9; hour <= 17; hour++) {
 
   // Create a new `<div>` for each row
@@ -51,17 +53,18 @@ for (var hour = 9; hour <= 17; hour++) {
   //  Add new `<i>` to the `<button>` element.
   saveButtonEl.append(floppyDiskIcon);
 }
-var savedHour = $("i").attr("data-hour");
-console.log(savedHour);
 
+
+// create a function to save the daily task to the localstorage on clicking the save button
   rootEl.on("click", ".fas", function () {
     var savedHour = $(this).attr("data-hour");
-    console.log(savedHour);
     dailyPlan[savedHour] = $("#" + savedHour).val();
-    console.log(dailyPlan[savedHour]);
-    localStorage.setItem(hourlyTask, JSON.stringify(dailyPlan) );   
+    localStorage.setItem(hourlyTask, JSON.stringify(dailyPlan) );  
+    alert("Your task was succeddfully saved!"); 
 });
 
+// create a function to loead the tasks from the localstorage when the page refreshes
+var savedHour = $("i").attr("data-hour");
 function loadDailyTask(){
   for (savedHour=9; savedHour<=17; savedHour++){
   $("#" + savedHour).text(dailyPlan[savedHour]);

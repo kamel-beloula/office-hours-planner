@@ -13,7 +13,7 @@ const hourlyTaskString = localStorage.getItem(hourlyTask);
 const dailyPlan = JSON.parse(hourlyTaskString) ?? Array(24);
 
 // create a loop to dynamically create the different page elements
-for (var hour = 20; hour <= 24; hour++) {
+for (var hour = 9; hour <= 15; hour++) {
   // Create a new `<div>` for each row
   let rowEl = $("<div>").addClass("row time-block");
 

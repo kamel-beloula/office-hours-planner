@@ -36,9 +36,9 @@ IT IS DONE when
 
 * Use of Moment.js date and time utilities and format method
 * Use of jQuery to retrieve and build DoM elements
-* Use of localStorage and JSON.stringify and JSON.parse methods which took me a while.
+* Use of localStorage and JSON.stringify and JSON.parse methods, which took me a while.
 
-## Website image
+## Screenshot
 
 ![Work Day Scheduler]
 
